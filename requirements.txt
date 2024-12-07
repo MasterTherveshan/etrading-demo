@@ -1,2 +1,10 @@
 streamlit
 openai
+streamlit_lottie
+requests
+os
+base64
+re
+PIL
+typing
+typing_extensions
