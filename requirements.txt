@@ -2,8 +2,6 @@ streamlit
 openai
 streamlit_lottie
 requests
-base64
-re
 PIL
 typing
 typing_extensions
