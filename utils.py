@@ -5,7 +5,7 @@ import os
 import base64
 import hmac
 import re
-from PIL import ImageFile
+from Pillow import ImageFile
 from typing import Tuple
 from typing_extensions import override
 
