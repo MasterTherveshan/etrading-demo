@@ -5,7 +5,6 @@ import os
 import base64
 import hmac
 import re
-from Pillow import ImageFile
 from typing import Tuple
 from typing_extensions import override
 
@@ -393,41 +392,6 @@ class EventHandler(AssistantEventHandler):
         # Create a new text box for the next operation
         st.session_state.text_boxes.append(st.empty())
 
-    def on_image_file_done(self, image_file: ImageFile):
-        """
-        Handler for when an image file is done
-        """
-        # Download file from OpenAI
-        image_data = client.files.content(image_file.file_id)
-        img_name = image_file.file_id
-
-        # Save file
-        image_data_bytes = image_data.read()
-        with open(f"images/{img_name}.png", "wb") as file:
-            file.write(image_data_bytes)
-
-        # Open file and encode as data
-        file_ = open(f"images/{img_name}.png", "rb")
-        contents = file_.read()
-        data_url = base64.b64encode(contents).decode("utf-8")
-        file_.close()
-
-        # Create new text box
-        st.session_state.text_boxes.append(st.empty())
-        st.session_state.assistant_text.append("")
-        
-        # # Display image in textbox
-        image_html = f'<p align="center"><img src="data:image/png;base64,{data_url}" width=600></p>'
-        st.session_state.text_boxes[-1].html(image_html)
-
-        # st.session_state.text_boxes[-1].image(f"images/{img_name}.png", width=600)
-
-        # Create new text box
-        st.session_state.assistant_text.append("")
-        st.session_state.text_boxes.append(st.empty())
-        
-        # Delete file from OpenAI
-        client.files.delete(image_file.file_id)
       
     def on_timeout(self):
         """

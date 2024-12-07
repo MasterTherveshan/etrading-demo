@@ -2,7 +2,6 @@ streamlit
 openai
 streamlit_lottie
 requests
-Pillow
 typing
 typing_extensions
 pandas
